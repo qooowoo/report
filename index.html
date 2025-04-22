@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>주간보고 자동 정리</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📋 주간보고 자동 정리</h1>
+
+    <div class="input-section">
+      <input type="text" id="name" placeholder="이름">
+      <input type="date" id="date">
+      <input type="text" id="task" placeholder="업무 내용">
+      <button onclick="addEntry()">추가</button>
+    </div>
+
+    <table id="reportTable">
+      <thead>
+        <tr>
+          <th>이름</th>
+          <th>날짜</th>
+          <th>업무 내용</th>
+          <th>삭제</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 여기에 항목이 추가됨 -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
