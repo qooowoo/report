@@ -1,7 +1,11 @@
 {
-  "dependencies": {
-    "next": "13.4.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
+  "name": "weekly-report-app",
+  "version": "1.0.0",
+  "description": "주간보고 자동 정리 웹앱",
+  "scripts": {
+    "start": "vercel dev",
+    "build": "echo 'Static project. No build needed.'"
+  },
+  "author": "Your Name",
+  "license": "MIT"
 }
