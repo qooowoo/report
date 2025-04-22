@@ -30,7 +30,7 @@ function deleteRow(btn) {
 
 function downloadCSV() {
   const rows = document.querySelectorAll("table tr");
-  let csvContent = "";
+  let csvContent = "\uFEFF"; // 🔥 UTF-8 BOM 추가
 
   rows.forEach(row => {
     const cols = row.querySelectorAll("td, th");
