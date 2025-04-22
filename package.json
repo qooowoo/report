@@ -4,15 +4,8 @@
   "description": "주간보고 자동 정리 웹앱",
   "scripts": {
     "start": "vercel dev",
-    "build": "echo 'Static project. No build needed.'"
+    "build": "echo 'Static project - no build step required.'"
   },
   "author": "Your Name",
   "license": "MIT"
-}
-{
-  "dependencies": {
-    "next": "13.4.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
 }
