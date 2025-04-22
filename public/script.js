@@ -1,7 +1,7 @@
 function addEntry() {
-  const name = document.getElementById("name").value;
-  const category = document.getElementById("category").value;
-  const task = document.getElementById("task").value;
+  const name = document.getElementById("name").value.trim();
+  const category = document.getElementById("category").value.trim();
+  const task = document.getElementById("task").value.trim();
 
   if (!name || !category || !task) {
     alert("모든 항목을 입력해주세요!");
@@ -12,8 +12,8 @@ function addEntry() {
   const data = getData();
   data.push(entry);
   saveData(data);
-
   renderTable();
+
   document.getElementById("name").value = '';
   document.getElementById("category").value = '';
   document.getElementById("task").value = '';
@@ -21,7 +21,7 @@ function addEntry() {
 
 function renderTable() {
   const tableBody = document.querySelector("#reportTable tbody");
-  tableBody.innerHTML = ""; // 기존 내용 비우기
+  tableBody.innerHTML = "";
 
   const data = getData();
   data.forEach((item, index) => {
@@ -57,11 +57,11 @@ function saveData(data) {
 
 function downloadCSV() {
   const rows = document.querySelectorAll("table tr");
-  let csvContent = "\uFEFF"; // UTF-8 BOM
+  let csvContent = "\uFEFF";
 
-  rows.forEach((row) => {
+  rows.forEach(row => {
     const cols = row.querySelectorAll("td, th");
-    const validCols = Array.from(cols).slice(0, -1); // "삭제" 제외
+    const validCols = Array.from(cols).slice(0, -1);
     const rowData = validCols.map(col => `"${col.textContent}"`).join(",");
     csvContent += rowData + "\n";
   });
@@ -75,5 +75,14 @@ function downloadCSV() {
   document.body.removeChild(link);
 }
 
-// 페이지 로드 시 테이블 렌더링
+// 🎯 엔터 키 입력시 addEntry 호출
+['name', 'category', 'task'].forEach(id => {
+  document.getElementById(id).addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      addEntry();
+    }
+  });
+});
+
+// 초기 테이블 로드
 window.onload = renderTable;
