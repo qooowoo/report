@@ -23,7 +23,6 @@ function addEntry() {
   document.getElementById("task").value = '';
 }
 
-
 function deleteRow(btn) {
   const row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
@@ -47,4 +46,3 @@ function downloadCSV() {
   link.click();
   document.body.removeChild(link);
 }
-
