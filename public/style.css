@@ -49,3 +49,23 @@ th, td {
 th {
   background-color: #f1f1f1;
 }
+
+.button-group {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-all-button {
+  background-color: crimson;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-all-button:hover {
+  background-color: darkred;
+}
+
