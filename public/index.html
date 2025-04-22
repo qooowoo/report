@@ -9,19 +9,20 @@
   <div class="container">
     <h1>📋 주간보고 자동 정리</h1>
 
-    <div class="input-section">
-      <input type="text" id="name" placeholder="이름">
-      <input type="text" id="category" placeholder="과업 분류">
-      <input type="text" id="task" placeholder="업무 내용">
-      <div class="button-group">
-        <div>
-          <button onclick="addEntry()">추가</button>
-          <button onclick="downloadCSV()">CSV 다운로드</button>
-        </div>
-        <button class="delete-all-button" onclick="deleteAll()">전체 삭제</button>
+    <!-- 입력 영역 -->
+    <div class="input-wrapper">
+      <div class="inputs">
+        <input type="text" id="name" placeholder="이름">
+        <input type="text" id="category" placeholder="과업 분류">
+        <input type="text" id="task" placeholder="업무 내용">
       </div>
+      <button class="add-btn" onclick="addEntry()">추가</button>
     </div>
 
+    <!-- 전체 삭제 버튼 -->
+    <button class="delete-all-button" onclick="deleteAll()">전체 삭제</button>
+
+    <!-- 테이블 -->
     <table id="reportTable">
       <thead>
         <tr>
@@ -31,10 +32,13 @@
           <th>삭제</th>
         </tr>
       </thead>
-      <tbody>
-
-      </tbody>
+      <tbody></tbody>
     </table>
+
+    <!-- CSV 다운로드 버튼 -->
+    <div class="csv-download-wrap">
+      <button onclick="downloadCSV()">CSV 다운로드</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
