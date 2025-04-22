@@ -1,15 +1,11 @@
 {
-  "name": "fuel-calculator",
+  "name": "weekly-report-app",
   "version": "1.0.0",
-  "private": true,
+  "description": "주간보고 자동 정리 웹앱",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "start": "vercel dev",
+    "build": "echo 'Static project. No build needed.'"
   },
-  "dependencies": {
-    "next": "13.4.19",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
+  "author": "Choi J-W",
+  "license": "MIT"
 }
