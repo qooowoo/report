@@ -56,26 +56,48 @@ function saveData(data) {
 }
 
 function downloadExcel() {
-  const data = getData();
+  const rawData = getData();
 
+  // 1. 이름 기준 정렬
+  const sortedData = [...rawData].sort((a, b) => a.name.localeCompare(b.name));
+
+  // 2. 이름별로 병합 정보 계산
   const worksheetData = [
-    ["이름", "과업 분류", "업무 내용"],
-    ...data.map(entry => [entry.name, entry.category, entry.task])
+    ["이름", "과업 분류", "업무 내용"]
   ];
 
+  const merges = [];
+  let currentName = null;
+  let startRow = 1;
+
+  sortedData.forEach((entry, index) => {
+    worksheetData.push([entry.name, entry.category, entry.task]);
+
+    if (entry.name !== currentName) {
+      if (currentName !== null && index + 1 > startRow + 1) {
+        merges.push({ s: { r: startRow, c: 0 }, e: { r: index, c: 0 } });
+      }
+      currentName = entry.name;
+      startRow = index + 1;
+    }
+
+    // 마지막 이름 처리
+    if (index === sortedData.length - 1 && index + 1 > startRow) {
+      merges.push({ s: { r: startRow, c: 0 }, e: { r: index + 1, c: 0 } });
+    }
+  });
+
+  // 3. 엑셀 워크시트 생성
   const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+  worksheet["!cols"] = [{ wch: 15 }, { wch: 20 }, { wch: 40 }];
+  worksheet["!merges"] = merges;
 
-  worksheet["!cols"] = [
-    { wch: 15 },
-    { wch: 20 },
-    { wch: 40 }
-  ];
-
+  // 4. 워크북 생성 및 다운로드
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "주간보고");
-
   XLSX.writeFile(workbook, "주간보고_자동정리.xlsx");
 }
+
 
 // 🎯 엔터 키 입력시 addEntry 호출
 ['name', 'category', 'task'].forEach(id => {
