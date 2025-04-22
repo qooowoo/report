@@ -14,6 +14,8 @@
       <input type="text" id="category" placeholder="과업 분류">
       <input type="text" id="task" placeholder="업무 내용">
       <button onclick="addEntry()">추가</button>
+      <button onclick="downloadCSV()" style="margin-top: 10px;">CSV 다운로드</button>
+      <button onclick="deleteAll()" style="background-color: crimson;">전체 삭제</button>
     </div>
 
     <table id="reportTable">
@@ -26,8 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        <button onclick="downloadCSV()" style="margin-top: 10px;">CSV 다운로드</button>
-        <button onclick="deleteAll()" style="background-color: crimson;">전체 삭제</button>
+
       </tbody>
     </table>
   </div>
