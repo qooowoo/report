@@ -58,14 +58,10 @@ function saveData(data) {
 function downloadExcel() {
   const rawData = getData();
 
-  // 1. 이름 기준 정렬
+  // 이름 정렬
   const sortedData = [...rawData].sort((a, b) => a.name.localeCompare(b.name));
 
-  // 2. 이름별로 병합 정보 계산
-  const worksheetData = [
-    ["이름", "과업 분류", "업무 내용"]
-  ];
-
+  const worksheetData = [["이름", "과업 분류", "업무 내용"]];
   const merges = [];
   let currentName = null;
   let startRow = 1;
@@ -81,21 +77,40 @@ function downloadExcel() {
       startRow = index + 1;
     }
 
-    // 마지막 이름 처리
     if (index === sortedData.length - 1 && index + 1 > startRow) {
       merges.push({ s: { r: startRow, c: 0 }, e: { r: index + 1, c: 0 } });
     }
   });
 
-  // 3. 엑셀 워크시트 생성
   const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-  worksheet["!cols"] = [{ wch: 15 }, { wch: 20 }, { wch: 40 }];
+
+  // 열 너비 설정
+  worksheet["!cols"] = [
+    { wch: 15 },
+    { wch: 20 },
+    { wch: 40 }
+  ];
+
+  // 병합 설정
   worksheet["!merges"] = merges;
 
-  // 4. 워크북 생성 및 다운로드
+  // 병합 셀에 가운데 정렬 스타일 적용
+  merges.forEach((merge) => {
+    const cellAddress = XLSX.utils.encode_cell(merge.s);
+    if (!worksheet[cellAddress]) return;
+    worksheet[cellAddress].s = {
+      alignment: {
+        vertical: "center",
+        horizontal: "center"
+      }
+    };
+  });
+
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "주간보고");
-  XLSX.writeFile(workbook, "주간보고_자동정리.xlsx");
+
+  // 스타일 사용을 위해 bookType 옵션 지정
+  XLSX.writeFile(workbook, "주간보고_자동정리.xlsx", { bookType: "xlsx", cellStyles: true });
 }
 
 
