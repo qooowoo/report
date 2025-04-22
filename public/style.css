@@ -2,10 +2,11 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: #f7f9fc;
   padding: 20px;
+  margin: 0;
 }
 
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   background: white;
   padding: 30px;
@@ -13,59 +14,124 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.input-section {
+/* 타이틀 */
+h1 {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
-.input-section input {
+/* 입력 래퍼 */
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* 입력 그룹 */
+.inputs {
+  flex-grow: 1;
+}
+
+.inputs input {
   padding: 10px;
   margin-right: 10px;
+  margin-bottom: 10px;
+  width: 30%;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
-button {
-  padding: 10px 15px;
+/* 추가 버튼 */
+.add-btn {
   background-color: #007bff;
   color: white;
+  padding: 10px 15px;
   border: none;
   cursor: pointer;
+  height: 42px;
+  font-size: 14px;
 }
 
-button:hover {
+.add-btn:hover {
   background-color: #0056b3;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-}
-
-th {
-  background-color: #f1f1f1;
-}
-
-.button-group {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+/* 전체 삭제 버튼 */
 .delete-all-button {
   background-color: crimson;
   color: white;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+  margin-bottom: 15px;
+  float: right;
 }
 
 .delete-all-button:hover {
   background-color: darkred;
 }
 
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+/* CSV 다운로드 버튼 위치 */
+.csv-download-wrap {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.csv-download-wrap button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.csv-download-wrap button:hover {
+  background-color: #0056b3;
+}
+
+/* 반응형 대응 (선택적) */
+@media (max-width: 600px) {
+  .inputs input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .delete-all-button {
+    float: none;
+    width: 100%;
+  }
+
+  .csv-download-wrap {
+    text-align: center;
+  }
+}
