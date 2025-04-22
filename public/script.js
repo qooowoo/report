@@ -55,24 +55,26 @@ function saveData(data) {
   localStorage.setItem("reportData", JSON.stringify(data));
 }
 
-function downloadCSV() {
-  const rows = document.querySelectorAll("table tr");
-  let csvContent = "\uFEFF";
+function downloadExcel() {
+  const data = getData();
 
-  rows.forEach(row => {
-    const cols = row.querySelectorAll("td, th");
-    const validCols = Array.from(cols).slice(0, -1);
-    const rowData = validCols.map(col => `"${col.textContent}"`).join(",");
-    csvContent += rowData + "\n";
-  });
+  const worksheetData = [
+    ["이름", "과업 분류", "업무 내용"],
+    ...data.map(entry => [entry.name, entry.category, entry.task])
+  ];
 
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const link = document.createElement("a");
-  link.setAttribute("href", URL.createObjectURL(blob));
-  link.setAttribute("download", "주간보고.csv");
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+  worksheet["!cols"] = [
+    { wch: 15 },
+    { wch: 20 },
+    { wch: 40 }
+  ];
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "주간보고");
+
+  XLSX.writeFile(workbook, "주간보고_자동정리.xlsx");
 }
 
 // 🎯 엔터 키 입력시 addEntry 호출
